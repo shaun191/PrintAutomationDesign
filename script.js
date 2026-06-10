@@ -26,7 +26,7 @@ nav?.querySelectorAll('a').forEach(link => {
    SETUP: After you build the Power Automate flow ("When an HTTP request is
    received"), copy its "HTTP POST URL" and paste it between the quotes below.
 --------------------------------------------------------------------------- */
-const FORM_ENDPOINT = ''; // <-- paste your Power Automate HTTP POST URL here
+const FORM_ENDPOINT = 'https://e5c9aacced60e92380989bbfbbd379.0e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/41853f36ee344ef2a5daf7acebc8d2d3/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dIEtyycBCJXt5BXXwRhw0gR405NubkME5qljOdQ9PaQ';
 
 const leadForm = document.getElementById('lead-form');
 if (leadForm) {
@@ -57,12 +57,14 @@ if (leadForm) {
       return;
     }
 
+    // Field names match the Power Automate flow's contract (Compose -> json(triggerBody())):
+    // lastname, email, phone, message, sourceUrl. sourceUrl tags the lead's origin in Dynamics.
     const payload = {
-      name: (fd.get('name') || '').toString().trim(),
+      lastname: (fd.get('name') || '').toString().trim(),
       email: (fd.get('email') || '').toString().trim(),
       phone: (fd.get('phone') || '').toString().trim(),
       message: (fd.get('message') || '').toString().trim(),
-      source: 'printautomationdesign.com',
+      sourceUrl: 'printautomationdesign.com',
       submittedAt: new Date().toISOString()
     };
 
