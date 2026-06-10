@@ -235,12 +235,17 @@
             <div><strong>Project types</strong><span>Print feasibility, line design, on-site programs, tooling, inspection, and data capture.</span></div>
           </div>
         </div>
-        <form class="lead-form" action="mailto:info@printautomationdesign.com" method="post" enctype="text/plain">
+        <form class="lead-form" id="lead-form">
           <label>Name <input name="name" required autocomplete="name" /></label>
           <label>Email <input type="email" name="email" required autocomplete="email" /></label>
           <label>Phone <input name="phone" autocomplete="tel" /></label>
           <label>Project details <textarea name="message" rows="6" required></textarea></label>
+          <!-- Spam honeypot: hidden from people, bots tend to fill it. Submissions with this filled are dropped. -->
+          <div class="lead-form-hp" aria-hidden="true" style="position:absolute;left:-5000px;top:auto;width:1px;height:1px;overflow:hidden;">
+            <label>Company website <input name="company_website" tabindex="-1" autocomplete="off" /></label>
+          </div>
           <button class="button primary" type="submit">Send project details</button>
+          <p class="form-status" role="status" aria-live="polite" hidden></p>
           <p class="form-note">We don't sell or share your data.</p>
         </form>
       </div>
